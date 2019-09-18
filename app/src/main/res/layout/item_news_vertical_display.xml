@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <variable
+        name="newsItem"
+        type="com.sliide.news.network.model.NewsItem" />
+</data>
+<LinearLayout
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="@dimen/vertical_list_item_height"
+    android:layout_margin="5dp">
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        app:imageUrl="@{newsItem.imageUrl}"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:text="@{newsItem.summary}"/>
+
+</LinearLayout>
+</layout>
