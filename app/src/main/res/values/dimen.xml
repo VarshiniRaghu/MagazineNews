@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="vertical_list_item_height">100dp</dimen>
+    <dimen name="view_pager_item_height">200dp</dimen>
+    <dimen name="view_pager_item_width">350dp</dimen>
+</resources>
