@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class ApiModule {
     companion object {
-        const val BASE_URL = "http://bit.ly/"
+        const val BASE_URL = "https://newsdata.io/api/"
     }
 
     @Provides

@@ -3,26 +3,35 @@ package com.sliide.news.network.model
 import com.google.gson.annotations.SerializedName
 
 class NewsItem {
-    @SerializedName("summary")
+    @SerializedName("title")
+    var title: String? = null
+
+    @SerializedName("description")
     var summary: String? = null
 
-    @SerializedName("images")
+    @SerializedName("image_url")
+    var imageUrl: String? = null
+
+    @SerializedName("content")
+    var content: String? = null
+
+    @SerializedName("pubDate")
+    var pubDate: String? = null
+
+    @SerializedName("source_id")
+    var sourceId: String? = null
+
+    @SerializedName("link")
+    var link: String? = null
+
+    // Maintain backward compatibility with existing code
     var images: Image? = null
 
-    fun getImageUrl(): String {
-        return if (images?.mainImage?.url != null) {
-            images?.mainImage?.url!!
-        } else {
-            ""
-        }
-    }
-
+    // Keep this class for backward compatibility
     class Image {
-        @SerializedName("mainImage")
         var mainImage: MainImage? = null
 
         class MainImage {
-            @SerializedName("url")
             var url: String? = null
         }
     }
