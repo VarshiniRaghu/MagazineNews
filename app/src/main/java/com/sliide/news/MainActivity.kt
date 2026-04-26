@@ -1,22 +1,23 @@
 package com.sliide.news
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import com.sliide.news.core.viewmodel.NewsListViewModel
-import com.sliide.news.databinding.ActivityMainBinding
-import com.sliide.news.network.ApiInterface
-import com.sliide.news.network.model.NewsItem
-import java.util.ArrayList
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import com.sliide.news.ui.NewsListScreen
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var apiInterface: ApiInterface
-    private val result: ArrayList<NewsItem> = ArrayList()
-    private lateinit var binding: ActivityMainBinding
-
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.newsListViewModel = NewsListViewModel()
+        setContent {
+            MaterialTheme {
+                Surface {
+                    NewsListScreen()
+                }
+            }
+        }
     }
 }
