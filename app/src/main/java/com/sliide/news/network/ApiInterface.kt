@@ -1,10 +1,14 @@
 package com.sliide.news.network
 
 import com.sliide.news.network.model.NewsResponseModel
-import io.reactivex.Observable
+import com.sliide.news.BuildConfig
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiInterface {
-    @GET("1/latest?apikey=pub_4a7e39447b314d858bc0d7023dc51814")
-    fun getNewsList(): Observable<NewsResponseModel>
+    @GET("1/latest")
+    suspend fun getNewsList(
+        @Query("apikey") apiKey: String = BuildConfig.NEWS_API_KEY,
+        @Query("language") language: String = "en"
+    ): NewsResponseModel
 }

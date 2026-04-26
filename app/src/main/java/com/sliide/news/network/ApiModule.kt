@@ -1,38 +1,50 @@
 package com.sliide.news.network
 
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-class ApiModule {
-    companion object {
-        const val BASE_URL = "https://newsdata.io/api/"
-    }
+@InstallIn(SingletonComponent::class)
+object ApiModule {
+
+    private const val BASE_URL = "https://newsdata.io/api/"
 
     @Provides
-    fun provideClient(): OkHttpClient {
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+        return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
     }
 
     @Provides
+    @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
-    fun provideApiService(): ApiInterface {
-        return provideRetrofit(provideClient()).create(ApiInterface::class.java)
+    @Singleton
+    fun provideApiInterface(retrofit: Retrofit): ApiInterface {
+        return retrofit.create(ApiInterface::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGeminiService(): GeminiService {
+        return GeminiService()
     }
 }
